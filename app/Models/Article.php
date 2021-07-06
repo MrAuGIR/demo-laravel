@@ -17,4 +17,16 @@ class Article extends Model
 
     protected $table = 'article';
     protected $primarykey = 'id';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'title',
+        'content',
+        'created_at',
+    ];
+
 }
