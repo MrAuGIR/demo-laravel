@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,13 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [PostController::class,'index']);
 
-Route::get('/posts', function(){
-    return view('posts');
-});
+/* exemple avec function anonyme */
+// Route::get('/posts', function(){
+//     return view('posts');
+// });
 
 /* exemple reponse JSON 
 Route::get('/posts', function () {
