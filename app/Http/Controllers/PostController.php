@@ -58,6 +58,19 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
-        
+        // $post = new Post();
+        // $post->title = $request->title;
+        // $post->content = $request->content;
+        // $post->save();
+
+        /*
+            bonne pratique 
+            Necéssite le champ protected $fillable = ['title','content']; dans le model
+        */
+        Post::create([
+            'title' => $request->title,
+            'content' => $request->content
+        ]);
+
     }
 }
