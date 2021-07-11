@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -9,10 +10,13 @@ class PostController extends Controller
     //
     public function index()
     {
+        $title = 'Liste des articles';
+        $posts = Post::all();
 
-        $title = 'Mon super titre';
-        $title2 = "Mon second article";
-        $listTitle = ['Mon super titre', 'Mon second article'];
+        return view('posts', [
+            'posts' => $posts,
+            'title' => $title
+        ]);
         /*
             Façon possible pour passer des données à une vue Blade
         */
@@ -20,18 +24,40 @@ class PostController extends Controller
         //return view('posts')->with('title',$title);
         //return view('posts',compact('title','title2'));
         //return view('posts', ['title'=> $title, 'title2' => $title2]);
-        return view('posts', compact('listTitle'));
     }
 
     public function show($id)
     {
-        $post = [
+        
+        $post = Post::findOrFail($id);
+        /*
+            exemple : Eloquent 
+        */
+        //$post = Post::where('title','=', 'Libero ratione est impedit enim.')->first();
+        //$post = Post::where('title','=', 'Libero ratione est impedit enim.')->firstOrFail();
 
-        ];
+        $title = $post->title;
+
+        return view('show',[
+           'post' => $post,
+           'title' => $title
+        ]);
     }
 
     public function contact()
     {
         return view('contact',['title' => 'contact']);
+    }
+
+    public function create()
+    {
+        return view('create',[
+            'title' => 'Créer un nouveau Poste'
+        ]);
+    }
+
+    public function store(Request $request)
+    {
+        
     }
 }
